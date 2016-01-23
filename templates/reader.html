@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	{% if name %}
+		{{ name }}
+	{% else %}
+		Reader
+	{% endif %}
+{% endblock %}
+
+{% block header %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/reader.css') }}">
+{% endblock %}
+
+{% block content %}
+	
+	{% if not name %}
+		<h1>Reader</h1>
+		<br>
+		<p>Hier kannst du einfach die URL zu deiner Website eingeben. Du musst direkt auf den Feed verlinken.</p>
+		<br>
+		<form method="post" action="/reader/{{ request.form['url'] }}">
+			<div class="form-group">
+				<label for="url">Url</label>
+				<input type="text" name="url" id="url" class="form-control" placeholder="www.all-craft.de/feed/">
+			</div>
+			<input type="submit" value="Los" name="submit" class="btn btn-info btn-lg right">
+		</form>
+	{% else %}
+		<h1>Request zur Website {{ name }}</h1>
+		{% if not error %}
+			{% if titles|count == urls|count == descs|count == pubDate|count %}
+				{% for x in range(titles|count) %}
+					<div class="contentContainer">
+						<p class="lead">{{ titles[x] }}</p>
+						<p>{{ pubDate[x] }}</p>
+						<a href="{{ urls[x] }}" target="_blank">Zum Original</a>
+						<br>
+						<p>{{ descs[x]|safe }}</p>
+					</div>
+				{% endfor %}
+			{% else %}
+				<div class="alert alert-warning">
+					<p>Es gab einen Fehler:</p>
+					<p>Title: {{ titles|count }}</p>
+					<p>Links: {{ urls|count }}</p>
+					<p>Beschreibungen: {{ descs|count }}</p>
+					<p>Datum des Veröffentlichens: {{ pubDate|count }}</p>
+					<br>
+					<p>Damit alles funktioniert muss beim Link, Title, Datum der Veröffentlichung und der Beschreibung die gleiche Zahl stehen.</p>
+				</div>
+			{% endif %}
+		{% else %}
+			<p>{{ error }}</p>
+		{% endif %}
+	{% endif %}
+
+{% endblock %}

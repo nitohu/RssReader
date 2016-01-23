@@ -1,0 +1,8 @@
+.contentContainer {
+	padding: 15px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	border: 1px solid gray;
+	border-radius: 5px;
+	text-align: center;
+}

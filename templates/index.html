@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Startseite
+{% endblock %}
+
+{% block content %}
+
+	<h1>RssReader</h1>
+	<p class="lead">RssReader der das tut was du willst!</p>
+	<br /><br /><br />
+	<h2>Featured Website</h2>
+	<ul>
+		{% for key, value in featured.items() %}
+			<li>{{ key }}: <a href="{{ value }}">Zum Feed</a></li>
+		{% endfor %}
+	</ul>
+	<br>
+	<h2>So benutzt du den RSS Reader</h2>
+	<ul>
+		<li>Seite mit RSS Fead raussuchen (bsp: www.all-craft.de/feed oder blog.crap-app.de/feed)</li>
+		<li>Gebe folgende URL nach dem Schema ein: 127.0.0.1:5000/reader/&lt;url&gt;/&lt;RSS (optional)&gt;/</li>
+		<li>Das Ergebnis könnte folgendes sein: 127.0.0.1:5000/reader/www.nitohu.de/feed/ oder auch 127.0.0.1:5000/reader/blog.crap-app.de/feed/</li>
+	</ul>
+
+{% endblock %}
