@@ -1,8 +1,9 @@
 # RssReader
 A Flask (Python 3) based RSS Reader
 
-Run on a local Server:
+## Run on a local Server:
 Linux / Mac OS X: python3 main.py
+
 Windows: py main.py OR py3 main.py
 
 ## Requirements
